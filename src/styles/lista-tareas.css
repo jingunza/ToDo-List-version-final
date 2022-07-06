@@ -1,0 +1,51 @@
+.body-hijo {
+    background-image: url('https://st.depositphotos.com/51474876/56584/i/450/depositphotos_565842716-stock-photo-felt-white-soft-rough-textile.jpg');
+    background-size: cover;
+    padding-bottom: 270px;
+}
+
+.cuaderno {
+    background: rgb(245, 245, 245);
+    box-shadow:
+        0 1px 1px rgba(0,0,0,0.15), /* The top layer shadow */
+        0 12px 0 -5px rgb(245, 245, 245), /* The second layer */
+        0 12px 1px -4px rgba(0,0,0,0.15), /* The second layer shadow */
+        0 24px 0 -10px rgb(245, 245, 245), /* The third layer */
+        0 24px 1px -9px rgba(0,0,0,0.15), /* The third layer shadow */
+        0 25px 0 -15px rgb(245, 245, 245), /* The fourth layer */
+        0px 5px 50px rgba(0, 0, 0, 0.35); /* The fourth layer shadow */
+    min-height: 400px;           
+}
+
+.titulo-lista {
+    color: rgb(175, 174, 174);
+    font-size: 6.7rem;
+    font-weight: 100;
+}
+
+.contenedor-form {
+    border: solid rgb(179, 179, 179);
+    border-width: 1px 0 1px 0;
+}
+
+.entrada-tarea {
+    border-width: 0;
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+    font-size: 1.7rem;
+    color: grey;
+}
+
+.lista-elemento {
+    border: solid rgb(179, 179, 179);
+    border-width: 0 0 1px 0;
+}
+
+.lista-texto {
+    font-size: 1.7rem;
+    color: grey;
+}
+
+.icono-eliminar {
+    font-size: 1.7rem;
+}

@@ -7,7 +7,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 const ListaDeTareas = () => {
   
   /* --------------datos originales de la lista ------------------------------------ */
-  const dataServidor = [{id: 1, text: 'lavar'}, {id : 2, text: 'estudiar'}, {id : 3, text: 'planchar'}];
+  const dataServidor = [{id: '10935lavar', text: 'lavar'}, {id : '20940estudiar', text: 'estudiar'}, {id : '30945planchar', text: 'planchar'}];
   const [registro, setRegistro] = useState(dataServidor);
 
   /*---------------funcion para eliminar elemento de lista con click ----------------*/
@@ -16,13 +16,16 @@ const ListaDeTareas = () => {
   };
 
   /*---------------funcion para insertar elemento con click ------------------------- */
-  let pivot = 1;
+  let currentTime = new Date();
+  let hora = currentTime.getHours().toString();
+  let minuto = currentTime.getMinutes().toString();
+  let segundo = currentTime.getSeconds().toString();
   const insertarTarea = (e) =>{
     if(e.key==='Enter'){
-      setRegistro([...registro, {id: pivot, text: e.target.value}])
+      setRegistro([...registro, {id: hora+minuto+segundo, text: e.target.value}]);
     };
     pivot++;
-  }
+  };
 
   /*----------------------------------------------------------------------------------*/
 	return (

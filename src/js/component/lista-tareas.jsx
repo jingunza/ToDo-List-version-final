@@ -24,7 +24,6 @@ const ListaDeTareas = () => {
     if(e.key==='Enter'){
       setRegistro([...registro, {id: hora+minuto+segundo, text: e.target.value}]);
     };
-    pivot++;
   };
 
   /*----------------------------------------------------------------------------------*/

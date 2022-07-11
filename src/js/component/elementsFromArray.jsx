@@ -1,7 +1,8 @@
 import React from "react";
 import '../../styles/efa.css';
 
-const ElementsFromArray = (props) => {
+// Solo se trata de un elemento de la lista ---------------------------------------
+const ElementsFromArray = (props) => { 
 
   return (
     <div className="elements-from-array">

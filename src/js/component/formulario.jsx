@@ -1,6 +1,8 @@
 import React from "react";
 import '../../styles/formulario.css';
 
+// se trata del input con una funcion onKeyDown con props
+// la funcion insertar proviene desde el archivo lista-tareas
 const Formulario = (props) => {
   return (
     <div className="contenedor-form">

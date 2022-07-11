@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import '../../styles/lista-tareas.css';
 import ElementsFromArray from './elementsFromArray.jsx';
 import Formulario from './formulario.jsx';
@@ -11,22 +11,40 @@ const ListaDeTareas = () => {
   const [registro, setRegistro] = useState(dataServidor);
 
   /*---------------funcion para eliminar elemento de lista con click ----------------*/
+  // esta funcion tiene como parametro un id, el cual luego será reemplazado por el valor
+  // de id real que proviene del array del state (en este caso se llamara registro.id, pero
+  // como estara dentro de un mapeo basado ya en ese state "registro", se pasara como item.id)
+  // IMPORTANTE: PARA QUE EL ID DEL PARAMETRO TENGA DE DONDE COGERSE, NECESITA QUE LA FUNCION
+  // ACTUE DENTRO DEL MAPEO PUES ESTE TRAE EL ARRAY DEL CUAL SALE EL ID, ES DECIR, EL MAPEO ESCRIBE EL HTML E INCLUYE LA FUNCION ELIMINAR.
+  // LA FUNCION INSERTAR EN CAMBIO NO NECESITA ESTAR DENTRO DEL MAPEO, PUES NO REQUIERE UNA REFERENCIA
+  // esta funcion debera ser incluiuda dentro de una lambda porque necesita un segundo parentesis para declarar el argumento.
   const eliminarTarea = (id) => {
-    setRegistro(registro.filter((item)=>item.id!==id)); //como referencio al id del div que voya a eliminar?
+    setRegistro(registro.filter((item)=>item.id!==id)); //referencio al id del elemento del array que voya a eliminar dentro del map
   };
 
   /*---------------funcion para insertar elemento con click ------------------------- */
+  // esta funcion ya esta basada en eventos en su definicion, y no tiene parametros
+  // por eso al reemplazar al prop no requiere una funcion lambda
   let currentTime = new Date();
   let hora = currentTime.getHours().toString();
   let minuto = currentTime.getMinutes().toString();
   let segundo = currentTime.getSeconds().toString();
   const insertarTarea = (e) =>{
     if(e.key==='Enter'){
-      setRegistro([...registro, {id: hora+minuto+segundo, text: e.target.value}]);
+      setRegistro([...registro, {id: hora+minuto+segundo, text: e.target.value}]); //esto SOLO funciona con DECONSTRUCCION, NO USAR PUSH
     };
   };
 
+  /* -----useEffect para borrar el input cada vez que se presione 'Enter'------------*/
+
+  useEffect(()=>{
+    const inputPlace = document.querySelector('input');
+    inputPlace.value = '';
+  },[insertarTarea]);
+
   /*----------------------------------------------------------------------------------*/
+  // notese que el key esta siendo declarado en la caja padre de todas, dentro del elemento de lista, esto es porque 
+  // la key sera reconocida en el padre unicamente
 	return (
 		<div className="body-hijo row justify-content-center">
 			<div className="cuaderno col-10 col-sm-8 col-md-6 col-lg-5 pt-5 pb-3 px-0 mt-5">
@@ -39,7 +57,7 @@ const ListaDeTareas = () => {
                 {item.text}
               </div>
               <div
-                onClick = {()=> eliminarTarea(item.id)}
+                onClick = {()=> eliminarTarea(item.id)} // aqui notese que lleva funcion lambda porque la func eliminar necesita argumentos
                 className="contenedor-icono-eliminar px-3 px-lg-4"
               >
                 <TiDeleteOutline className="icono-eliminar" />

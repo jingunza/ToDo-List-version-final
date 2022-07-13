@@ -30,10 +30,10 @@ const ListaDeTareas = () => {
   let minuto = currentTime.getMinutes().toString();
   let segundo = currentTime.getSeconds().toString();
   const insertarTarea = (e) =>{
-    if(e.key==='Enter'){
+    if(e.target.value.trim().length!==0 && e.key==='Enter'){
       setRegistro([...registro, {id: hora+minuto+segundo, text: e.target.value}]); //esto SOLO funciona con DECONSTRUCCION, NO USAR PUSH
+      };
     };
-  };
 
   /* -----useEffect para borrar el input cada vez que se presione 'Enter'------------*/
 
@@ -51,7 +51,13 @@ const ListaDeTareas = () => {
 				<h1 className="titulo-lista text-center mt-0 mb-4">todos</h1>
         <div className="zona-rayada">
           <Formulario insertar={insertarTarea} />
-          <ElementsFromArray registro={registro.map((item,index)=>
+          <ElementsFromArray registro={(registro.length==0)? 
+            <div className="lista-elemento d-flex align-items-center justify-content-between">
+              <div className="lista-texto px-3 px-lg-5">
+                No hay tareas, añadir tareas
+              </div>
+            </div>
+            : registro.map((item,index)=>
             <div key={item+index} className="lista-elemento d-flex align-items-center justify-content-between">
               <div className="lista-texto px-3 px-lg-5" id={item.id}>
                 {item.text}
